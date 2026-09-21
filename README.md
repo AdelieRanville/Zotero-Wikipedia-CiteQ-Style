@@ -2,6 +2,8 @@
 
 A [Citation Style Language](https://citationstyles.org/) (CSL) style for [Zotero](https://www.zotero.org/) that outputs references for Wikipedia using the [`{{Cite Q}}`](https://en.wikipedia.org/wiki/Template:Cite_Q) template. The template only needs the Wikidata item identifier (QID) of the source.
 
+Acknowledgement : This style was coded using Claude
+
 ## Usage
 
 1. **Install the style**: download `wikipedia-cite-q.csl`, then in Zotero go to *Settings → Cite → Styles → `+`* and select the file (or simply double-click the file).
