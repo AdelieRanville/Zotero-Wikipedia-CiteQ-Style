@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="en-US" demote-non-dropping-particle="never">
+  <info>
+    <title>Wikipedia Cite Q (Wikidata QID)</title>
+    <title-short>Cite Q</title-short>
+    <id>http://www.zotero.org/styles/wikipedia-cite-q</id>
+    <link href="http://www.zotero.org/styles/wikipedia-cite-q" rel="self"/>
+    <link href="https://en.wikipedia.org/wiki/Template:Cite_Q" rel="documentation"/>
+    <author>
+      <name>Your Name</name>
+    </author>
+    <category citation-format="label"/>
+    <summary>Outputs a named Wikipedia reference using the Cite Q template, built from the Wikidata QID stored in the Zotero Extra field ("QID: Q42"). The ref name follows an author-date pattern (e.g. Smith2020).</summary>
+    <updated>2026-09-21T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="en">
+    <terms>
+      <!-- Used in ref names: "Smith EtAl2020" style for 3+ authors -->
+      <term name="et-al">EtAl</term>
+    </terms>
+  </locale>
+  <!-- Wikidata QID from the Extra field. citeproc-js keeps the key exactly as typed,
+       so "QID: Q42" is the variable QID (uppercase); "qid: Q42" is also accepted. -->
+  <macro name="qid">
+    <choose>
+      <if variable="QID">
+        <text variable="QID"/>
+      </if>
+      <else-if variable="qid">
+        <text variable="qid"/>
+      </else-if>
+    </choose>
+  </macro>
+  <!-- Ref name: first author family name (two authors concatenated, 3+ = first + EtAl),
+       falling back to editor, then to the QID itself; year and year-suffix added when
+       an author or editor is present. Empty when nothing is available. -->
+  <macro name="ref-name">
+    <group>
+      <names variable="author">
+        <name form="short" delimiter="" et-al-min="3" et-al-use-first="1"/>
+        <et-al term="et-al"/>
+        <substitute>
+          <names variable="editor"/>
+          <text macro="qid"/>
+        </substitute>
+      </names>
+      <choose>
+        <if variable="author editor" match="any">
+          <choose>
+            <if variable="issued">
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
+              <text variable="year-suffix"/>
+            </if>
+            <else>
+              <text value="nd"/>
+            </else>
+          </choose>
+        </if>
+      </choose>
+    </group>
+  </macro>
+  <macro name="ref-name-attribute">
+    <group>
+      <text value=" name=&quot;"/>
+      <text macro="ref-name"/>
+      <text value="&quot;"/>
+    </group>
+  </macro>
+  <!-- Page number typed in the Zotero citation dialog (locator with the "page" label).
+       Only available in citations; the bibliography has no locator, so nothing is output there. -->
+  <macro name="page-param">
+    <choose>
+      <if locator="page">
+        <group>
+          <text value="|page="/>
+          <text variable="locator"/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+  <!-- Produces <ref name="Smith2020">{{Cite Q|Q42|page=42}}</ref>,
+       or a visible marker when no QID is present -->
+  <macro name="cite-q">
+    <!-- No wrapping group here: a group would be suppressed entirely when the
+         item has no QID/author, and the missing-QID marker would disappear. -->
+    <text value="&lt;ref"/>
+    <text macro="ref-name-attribute"/>
+    <text value="&gt;"/>
+    <choose>
+      <if variable="QID qid" match="any">
+        <group>
+          <text value="{{Cite Q|"/>
+          <text macro="qid"/>
+          <text macro="page-param"/>
+          <text value="}}"/>
+        </group>
+      </if>
+      <else>
+        <text value="{{Cite Q|QID MISSING"/>
+        <text macro="page-param"/>
+        <text value="}}"/>
+      </else>
+    </choose>
+    <text value="&lt;/ref&gt;"/>
+  </macro>
+  <citation disambiguate-add-year-suffix="true">
+    <layout>
+      <text macro="cite-q"/>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <text macro="cite-q"/>
+    </layout>
+  </bibliography>
+</style>
