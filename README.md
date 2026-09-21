@@ -10,9 +10,10 @@ A [Citation Style Language](https://citationstyles.org/) (CSL) style for [Zotero
    QID: Q42
    ```
    The line must be at the **top** of the Extra field (first or second line): the citation processor stops reading `Key: value` lines at the first line that is not of that form. Put other content (e.g. `PMID: ...`) below or in between only if it also follows the `Key: value` form.
+   You can use Cita to get the QID : https://github.com/zotero-cita/zotero-cita
 
-3. To generate a single citation : Select your items, right-click → *Create Bibliography from Items…* (or *Copy Citation / Bibliography*), choose **Wikipedia Cite Q**, and set the output mode to *Copy to Clipboard* (or use it from the word-processor plugin). 
-4. Paste the result into your Wikipedia edit window.
+4. To generate a single citation : Select your items, right-click → *Create Bibliography from Items…* (or *Copy Citation / Bibliography*), choose **Wikipedia Cite Q**, and set the output mode to *Copy to Clipboard* (or use it from the word-processor plugin). 
+5. Paste the result into your Wikipedia edit window.
 
 ## Output
 
