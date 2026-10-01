@@ -3,11 +3,11 @@
   <info>
     <title>Wikipedia Cite Q (Wikidata QID)</title>
     <title-short>Cite Q</title-short>
-    <id>http://www.zotero.org/styles/wikipedia-cite-q</id>
+    <id>https://github.com/AdelieRanville/Zotero-Wikipedia-CiteQ-Style</id>
     <link href="http://www.zotero.org/styles/wikipedia-cite-q" rel="self"/>
     <link href="https://en.wikipedia.org/wiki/Template:Cite_Q" rel="documentation"/>
     <author>
-      <name>Your Name</name>
+      <name>Adelie Ranville</name>
     </author>
     <category citation-format="label"/>
     <summary>Outputs a named Wikipedia reference using the Cite Q template, built from the Wikidata QID stored in the Zotero Extra field ("QID: Q42"). The ref name follows an author-date pattern (e.g. Smith2020).</summary>
